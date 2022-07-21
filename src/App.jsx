@@ -1,31 +1,26 @@
-import React, { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import React from "react";
+import { useReducer } from "react";
+import { Route } from "react-router-dom";
+import { Routes } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import Test from "./pages/Test";
+import { RootContext } from "./utilities/context";
+import { reducer } from "./utilities/reducer";
 
 function App() {
-    const [count, setCount] = useState(0);
-
+    const [context, dispatchContext] = useReducer(reducer, { users: [0, 1, 3] });
     return (
-        <div className="App">
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src="/vite.svg" className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-            <br />
-            <a href="test.html">TEST</a>
-        </div>
+        <RootContext.Provider value={[context, dispatchContext]}>
+            <HashRouter>
+                <Routes>
+                    <Route path="/">
+                        <Route index element={<Home />} />
+                        <Route path="test" element={<Test />} />
+                    </Route>
+                </Routes>
+            </HashRouter>
+        </RootContext.Provider>
     );
 }
 
