@@ -1,25 +1,22 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import reactLogo from "../assets/react.svg";
 import "../App.css";
 import { RootContext } from "../utilities/context";
 
 const Home = () => {
-    const [context, dispatchContext] = useContext(RootContext);
-    const [count, setCount] = useState(0);
+    const [{ users, counter }, dispatchContext] = useContext(RootContext);
 
     const handleClick = () => {
-        setCount((count) => count + 1);
-        dispatchContext({ type: "set", key: "counter", value: count + 1 });
+        dispatchContext({ type: "set", key: "counter", value: counter + 1 });
     };
 
     useEffect(() => {
-        console.log(count);
-        console.log(context);
-    }, [count]);
+        console.log(users);
+        console.log(counter);
+    }, [counter]);
 
     return (
         <div className="App">
@@ -33,7 +30,7 @@ const Home = () => {
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                <button onClick={handleClick}>count is {count}</button>
+                <button onClick={handleClick}>count is {counter}</button>
                 <p>
                     Edit <code>src/App.jsx</code> and save to test HMR
                 </p>

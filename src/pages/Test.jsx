@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import { RootContext } from "../utilities/context";
 
 const Test = () => {
-    const [context] = useContext(RootContext);
+    const [{ users, counter }] = useContext(RootContext);
 
     useEffect(() => {
-        console.log(context);
+        console.log(users);
+        console.log(counter);
     }, []);
 
     return (

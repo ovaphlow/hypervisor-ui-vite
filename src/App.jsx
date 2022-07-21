@@ -9,7 +9,7 @@ import { RootContext } from "./utilities/context";
 import { reducer } from "./utilities/reducer";
 
 function App() {
-    const [context, dispatchContext] = useReducer(reducer, { users: [0, 1, 3] });
+    const [context, dispatchContext] = useReducer(reducer, { users: [0, 1, 3], counter: 0 });
     return (
         <RootContext.Provider value={[context, dispatchContext]}>
             <HashRouter>
